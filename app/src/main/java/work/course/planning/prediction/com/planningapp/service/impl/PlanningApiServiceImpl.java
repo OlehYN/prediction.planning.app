@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import work.course.planning.prediction.com.planningapp.config.PlanningApplication;
+import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RequestResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
@@ -31,6 +32,16 @@ public class PlanningApiServiceImpl implements PlanningApiService {
 
         return objectMapper.readValue(requestResponse.getOutput(),
                 ModelsListDto.class);
+    }
+
+    @Override
+    public CreateModelDto createModel(String name) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("name", name);
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "createModel", requestParameters, "");
+        return objectMapper.readValue(requestResponse.getOutput(),
+                CreateModelDto.class);
     }
 
     private Map<String, String> minArgs() {

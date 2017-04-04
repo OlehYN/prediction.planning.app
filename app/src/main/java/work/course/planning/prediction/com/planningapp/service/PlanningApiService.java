@@ -2,6 +2,7 @@ package work.course.planning.prediction.com.planningapp.service;
 
 import java.io.IOException;
 
+import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
 
 /**
@@ -10,4 +11,6 @@ import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDt
 
 public interface PlanningApiService {
     ModelsListDto getModels() throws IOException;
+
+    CreateModelDto createModel(String name) throws  IOException;
 }

@@ -4,9 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="50dp"
+        android:weightSum="1">
+
+        <EditText
+            android:id="@+id/modelNameEditText"
+            android:layout_width="187dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textShortMessage"
+            android:text="Model name"
+            android:layout_weight="0.85" />
+
+        <Button
+            android:id="@+id/newModelButton"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:text="New model" />
+    </LinearLayout>
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"></ListView>
+
+
+
 </LinearLayout>

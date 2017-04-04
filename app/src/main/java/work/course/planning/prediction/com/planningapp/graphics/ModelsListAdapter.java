@@ -27,6 +27,10 @@ public class ModelsListAdapter extends BaseAdapter {
         layoutInflater = LayoutInflater.from(aContext);
     }
 
+    public  List<ModelInfoDto> getData(){
+        return listData;
+    }
+
     @Override
     public int getCount() {
         return listData.size();

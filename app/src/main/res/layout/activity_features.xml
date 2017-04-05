@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:focusableInTouchMode="true"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="205dp"
+            android:layout_height="39dp"
+            android:layout_marginLeft="10dp"
+            android:text="Features:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:layout_weight="0.77" />
+
+        <Button
+            android:id="@+id/backToModel"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:text="BACK TO MODEL" />
+    </LinearLayout>
+
+
+    <ExpandableListView
+        android:id="@+id/featuresExpList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="1dp"
+        android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft" />
+
+</LinearLayout>

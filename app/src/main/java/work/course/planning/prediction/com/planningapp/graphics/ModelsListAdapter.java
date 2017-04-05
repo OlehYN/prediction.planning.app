@@ -8,11 +8,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.R;
-import work.course.planning.prediction.com.planningapp.dto.response.ModelInfoDto;
+import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 
 /**
  * Created by Oleh Yanivskyy on 04.04.2017.

@@ -8,6 +8,14 @@
     android:weightSum="1"
     tools:context="work.course.planning.prediction.com.planningapp.ModelManageActivity">
 
+    <TextView
+        android:id="@+id/modelName"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="TextView"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

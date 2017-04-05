@@ -2,6 +2,8 @@ package work.course.planning.prediction.com.planningapp.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
+
 /**
  * Created by Oleh Yanivskyy on 05.04.2017.
  */

@@ -41,6 +41,7 @@ public class SendRequestServiceImpl implements SendRequestService {
             os.flush();
 
             int code = conn.getResponseCode();
+            //TODO handle unauthorized
 
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));

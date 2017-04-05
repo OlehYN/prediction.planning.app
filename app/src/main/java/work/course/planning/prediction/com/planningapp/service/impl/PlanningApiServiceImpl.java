@@ -8,6 +8,8 @@ import java.util.Map;
 
 import work.course.planning.prediction.com.planningapp.config.PlanningApplication;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
+import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
+import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RequestResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
@@ -42,6 +44,26 @@ public class PlanningApiServiceImpl implements PlanningApiService {
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "createModel", requestParameters, "");
         return objectMapper.readValue(requestResponse.getOutput(),
                 CreateModelDto.class);
+    }
+
+    @Override
+    public DeleteModelDto deleteModel(Long id) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("modelId", String.valueOf(id));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "deleteModel", requestParameters, "");
+        return objectMapper.readValue(requestResponse.getOutput(), DeleteModelDto.class);
+    }
+
+    @Override
+    public FeaturesListDto getFeatures(Long id) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("modelId", String.valueOf(id));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "features", requestParameters, "");
+
+        return objectMapper.readValue(requestResponse.getOutput(),
+                FeaturesListDto.class);
     }
 
     private Map<String, String> minArgs() {

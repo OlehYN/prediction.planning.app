@@ -1,5 +1,6 @@
 package work.course.planning.prediction.com.planningapp;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
-import work.course.planning.prediction.com.planningapp.dto.response.ModelInfoDto;
+import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
 import work.course.planning.prediction.com.planningapp.graphics.ModelsListAdapter;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
@@ -116,6 +117,11 @@ public class MainActivity extends AppCompatActivity {
                 public void onItemClick(AdapterView<?> a, View v, int position, long id) {
                     Object o = listView.getItemAtPosition(position);
                     ModelInfoDto modelInfoDto = (ModelInfoDto) o;
+                    Intent modelManageIntent = new Intent(MainActivity.this, ModelManageActivity.class);
+                    modelManageIntent.putExtra("modelInfoId", modelInfoDto.getId());
+                    modelManageIntent.putExtra("modelInfoName", modelInfoDto.getName());
+
+                    startActivity(modelManageIntent);
                     Toast.makeText(MainActivity.this, "Selected :" + " " + modelInfoDto, Toast.LENGTH_LONG).show();
                 }
             });

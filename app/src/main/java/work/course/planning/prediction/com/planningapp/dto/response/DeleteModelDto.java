@@ -2,21 +2,23 @@ package work.course.planning.prediction.com.planningapp.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
-import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
-
 /**
- * Created by Oleh Yanivskyy on 04.04.2017.
+ * Created by Oleh Yanivskyy on 05.04.2017.
  */
 
-public class ModelsListDto {
-    private int code;
-
+public class DeleteModelDto {
     @JsonProperty("data")
-    private List<ModelInfoDto> models;
-
+    private Boolean result;
+    private int code;
     private String errorCode;
+
+    public Boolean getResult() {
+        return result;
+    }
+
+    public void setResult(Boolean result) {
+        this.result = result;
+    }
 
     public int getCode() {
         return code;
@@ -24,14 +26,6 @@ public class ModelsListDto {
 
     public void setCode(int code) {
         this.code = code;
-    }
-
-    public List<ModelInfoDto> getModels() {
-        return models;
-    }
-
-    public void setModels(List<ModelInfoDto> models) {
-        this.models = models;
     }
 
     public String getErrorCode() {
@@ -44,9 +38,9 @@ public class ModelsListDto {
 
     @Override
     public String toString() {
-        return "ModelsListDto{" +
-                "code=" + code +
-                ", models=" + models +
+        return "DeleteModelDto{" +
+                "result=" + result +
+                ", code=" + code +
                 ", errorCode='" + errorCode + '\'' +
                 '}';
     }

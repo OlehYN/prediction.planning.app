@@ -4,17 +4,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+import work.course.planning.prediction.com.planningapp.dto.info.FeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 
 /**
- * Created by Oleh Yanivskyy on 04.04.2017.
+ * Created by Oleh Yanivskyy on 05.04.2017.
  */
 
-public class ModelsListDto {
+public class FeaturesListDto {
     private int code;
 
     @JsonProperty("data")
-    private List<ModelInfoDto> models;
+    private List<FeatureDto> features;
 
     private String errorCode;
 
@@ -26,12 +27,12 @@ public class ModelsListDto {
         this.code = code;
     }
 
-    public List<ModelInfoDto> getModels() {
-        return models;
+    public List<FeatureDto> getFeatures() {
+        return features;
     }
 
-    public void setModels(List<ModelInfoDto> models) {
-        this.models = models;
+    public void setFeatures(List<FeatureDto> features) {
+        this.features = features;
     }
 
     public String getErrorCode() {
@@ -44,9 +45,9 @@ public class ModelsListDto {
 
     @Override
     public String toString() {
-        return "ModelsListDto{" +
+        return "FeaturesListDto{" +
                 "code=" + code +
-                ", models=" + models +
+                ", features=" + features +
                 ", errorCode='" + errorCode + '\'' +
                 '}';
     }

@@ -14,7 +14,7 @@ public class ModelsListDto {
     @JsonProperty("data")
     private List<ModelInfoDto> models;
 
-    private String status;
+    private String errorCode;
 
     public int getCode() {
         return code;
@@ -32,12 +32,12 @@ public class ModelsListDto {
         this.models = models;
     }
 
-    public String getStatus() {
-        return status;
+    public String getErrorCode() {
+        return errorCode;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setErrorCode(String errorCode) {
+        this.errorCode = errorCode;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class ModelsListDto {
         return "ModelsListDto{" +
                 "code=" + code +
                 ", models=" + models +
-                ", status='" + status + '\'' +
+                ", errorCode='" + errorCode + '\'' +
                 '}';
     }
 }

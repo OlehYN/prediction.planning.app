@@ -31,6 +31,7 @@ public class SendRequestServiceImpl implements SendRequestService {
             }
             URL url = new URL(stringUrl);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setConnectTimeout(10000);
             conn.setDoOutput(true);
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Content-Type", "application/json");

@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:focusableInTouchMode="true">
 
         <EditText
             android:id="@+id/modelNameEditText"
@@ -15,8 +16,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:inputType="textShortMessage"
-            android:text="Model name"
-            android:layout_weight="0.85" />
+            android:layout_weight="0.85"/>
 
         <Button
             android:id="@+id/newModelButton"

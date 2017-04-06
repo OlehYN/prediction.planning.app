@@ -1,4 +1,4 @@
-package work.course.planning.prediction.com.planningapp;
+package work.course.planning.prediction.com.planningapp.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
-import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -25,10 +25,8 @@ public class ModelManageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_model_manage);
 
-        TextView modelName = (TextView) findViewById(R.id.modelName);
         final String modelInfoName = getIntent().getStringExtra("modelInfoName");
-
-        modelName.setText(modelInfoName);
+        setTitle("Planning app: model " + modelInfoName);
 
         modelInfoId = getIntent().getLongExtra("modelInfoId", -1L);
 
@@ -65,6 +63,15 @@ public class ModelManageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO async task
+            }
+        });
+
+        Button backToModelsButton = (Button) findViewById(R.id.backToModels);
+        backToModelsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ModelManageActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }

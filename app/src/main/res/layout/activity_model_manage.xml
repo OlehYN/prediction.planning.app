@@ -6,15 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context="work.course.planning.prediction.com.planningapp.ModelManageActivity">
+    tools:context="work.course.planning.prediction.com.planningapp.activity.ModelManageActivity">
 
-    <TextView
-        android:id="@+id/modelName"
+    <Button
+        android:id="@+id/backToModels"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="TextView"
-        android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:layout_height="wrap_content"
+        android:text="Back to models" />
 
     <LinearLayout
         android:layout_width="match_parent"

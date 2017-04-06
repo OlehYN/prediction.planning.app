@@ -1,4 +1,4 @@
-package work.course.planning.prediction.com.planningapp;
+package work.course.planning.prediction.com.planningapp.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.graphics.FeaturesListAdapter;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
@@ -25,6 +26,7 @@ public class FeaturesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_features);
+        setTitle("Planning app: features");
 
         final Long modelId = getIntent().getLongExtra("modelInfoId", -1L);
         final String modelName = getIntent().getStringExtra("modelInfoName");
@@ -35,6 +37,18 @@ public class FeaturesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FeaturesActivity.this, ModelManageActivity.class);
+                intent.putExtra("modelInfoId", modelId);
+                intent.putExtra("modelInfoName", modelName);
+
+                startActivity(intent);
+            }
+        });
+
+        Button createFeatureButton = (Button) findViewById(R.id.createFeature);
+        createFeatureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeaturesActivity.this, CreateFeatureActivity.class);
                 intent.putExtra("modelInfoId", modelId);
                 intent.putExtra("modelInfoName", modelName);
 

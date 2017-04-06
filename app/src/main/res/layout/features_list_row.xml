@@ -23,13 +23,15 @@
         android:textStyle="bold" />
 
     <Button
-        android:id="@+id/removeButton"
+        android:id="@+id/renameButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:textColor="#343434"
         android:textSize="12sp"
-        android:text="delete"
+        android:width="50dp"
+        android:height="20dp"
+        android:text="Rename"
         android:focusable="false"
         android:layout_alignBottom="@+id/addListValue" />
 
@@ -39,12 +41,11 @@
         android:layout_height="wrap_content"
         android:textColor="#343434"
         android:textSize="12sp"
-        android:layout_marginRight="11dp"
-        android:layout_marginEnd="11dp"
-        android:layout_alignParentTop="true"
+        android:width="50dp"
+        android:height="20dp"
         android:text="Add"
-        android:layout_toLeftOf="@+id/removeButton"
-        android:layout_toStartOf="@+id/removeButton"
+        android:layout_toLeftOf="@+id/renameButton"
+        android:layout_toStartOf="@+id/renameButton"
         android:focusable="false"
         android:layout_alignBottom="@+id/type" />
 </RelativeLayout>

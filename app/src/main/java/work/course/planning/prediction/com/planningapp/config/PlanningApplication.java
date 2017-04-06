@@ -14,7 +14,7 @@ public class PlanningApplication extends Application{
     private static PlanningApplication planningApplication;
 
     private String token = "228";
-    private String host = "http://192.168.0.103";
+    private String host = "http://192.168.0.101";
     private int port = 8080;
 
     public void onCreate() {

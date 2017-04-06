@@ -21,6 +21,7 @@
         <Button
             android:id="@+id/newModelButton"
             android:layout_width="134dp"
+            android:layout_weight="0.15"
             android:layout_height="wrap_content"
             android:text="New model" />
     </LinearLayout>

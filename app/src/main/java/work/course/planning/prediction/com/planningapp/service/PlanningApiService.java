@@ -2,6 +2,8 @@ package work.course.planning.prediction.com.planningapp.service;
 
 import java.io.IOException;
 
+import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
@@ -19,4 +21,6 @@ public interface PlanningApiService {
     DeleteModelDto deleteModel(Long id) throws IOException;
 
     FeaturesListDto getFeatures(Long id) throws  IOException;
+
+    CreateFeatureResultDto createFeature(CreateFeatureDto createFeatureDto) throws  IOException;
 }

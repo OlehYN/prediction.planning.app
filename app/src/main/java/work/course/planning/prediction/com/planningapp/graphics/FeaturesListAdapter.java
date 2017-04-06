@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -97,6 +98,11 @@ public class FeaturesListAdapter extends BaseExpandableListAdapter {
             bottom.setText("Categorical");
         else
             bottom.setText("Number");
+
+        Button addListValueButton = (Button) view.findViewById(R.id.addListValue);
+
+        if(!featureDto.isCategory())
+            addListValueButton.setEnabled(false);
 
         return view;
     }

@@ -1,4 +1,4 @@
-package work.course.planning.prediction.com.planningapp;
+package work.course.planning.prediction.com.planningapp.activity;
 
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setTitle("Planning app: models");
 
         new ListModelAsyncTask().execute();
         final Button createModelButton = (Button) findViewById(R.id.newModelButton);
@@ -122,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
                     modelManageIntent.putExtra("modelInfoName", modelInfoDto.getName());
 
                     startActivity(modelManageIntent);
-                    Toast.makeText(MainActivity.this, "Selected :" + " " + modelInfoDto, Toast.LENGTH_LONG).show();
                 }
             });
             ((ModelsListAdapter) listView.getAdapter()).notifyDataSetChanged();

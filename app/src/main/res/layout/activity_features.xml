@@ -10,18 +10,17 @@
         android:focusableInTouchMode="true"
         android:weightSum="1">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="205dp"
-            android:layout_height="39dp"
-            android:layout_marginLeft="10dp"
-            android:text="Features:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-            android:layout_weight="0.77" />
+        <Button
+            android:id="@+id/createFeature"
+            android:layout_width="190dp"
+            android:layout_weight="0.5"
+            android:layout_height="wrap_content"
+            android:text="CREATE FEATURE" />
 
         <Button
             android:id="@+id/backToModel"
-            android:layout_width="134dp"
+            android:layout_width="190dp"
+            android:layout_weight="0.5"
             android:layout_height="wrap_content"
             android:text="BACK TO MODEL" />
     </LinearLayout>

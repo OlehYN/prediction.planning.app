@@ -20,6 +20,9 @@ public class FeaturesActivity extends AppCompatActivity {
     private ExpandableListView expandableListView;
     private FeaturesListAdapter featureListAdapter;
 
+    private Long modelId;
+    private String modelName;
+
     private PlanningApiService planningApiService = new PlanningApiServiceImpl();
 
     @Override
@@ -28,8 +31,8 @@ public class FeaturesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_features);
         setTitle("Planning app: features");
 
-        final Long modelId = getIntent().getLongExtra("modelInfoId", -1L);
-        final String modelName = getIntent().getStringExtra("modelInfoName");
+        modelId = getIntent().getLongExtra("modelInfoId", -1L);
+        modelName = getIntent().getStringExtra("modelInfoName");
         new ListFeatureAsyncTask().execute(modelId);
 
         Button modelsButtons = (Button) findViewById(R.id.backToModel);
@@ -84,7 +87,7 @@ public class FeaturesActivity extends AppCompatActivity {
             }
 
             expandableListView = (ExpandableListView) findViewById(R.id.featuresExpList);
-            featureListAdapter = new FeaturesListAdapter(FeaturesActivity.this, featuresListDto.getFeatures());
+            featureListAdapter = new FeaturesListAdapter(FeaturesActivity.this, featuresListDto.getFeatures(), FeaturesActivity.this, modelId, modelName);
             expandableListView.setAdapter(featureListAdapter);
         }
     }

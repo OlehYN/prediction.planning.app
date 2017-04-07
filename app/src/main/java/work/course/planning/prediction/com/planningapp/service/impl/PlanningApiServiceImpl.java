@@ -4,15 +4,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import work.course.planning.prediction.com.planningapp.config.PlanningApplication;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.response.AddListValueFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.RenameFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RequestResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.SendRequestService;
@@ -71,10 +74,31 @@ public class PlanningApiServiceImpl implements PlanningApiService {
     @Override
     public CreateFeatureResultDto createFeature(CreateFeatureDto createFeatureDto) throws IOException {
         Map<String, String> requestParameters = minArgs();
-        System.out.println(objectMapper.writeValueAsString(createFeatureDto));
+
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "createFeature", requestParameters, objectMapper.writeValueAsString(createFeatureDto));
         return objectMapper.readValue(requestResponse.getOutput(),
                 CreateFeatureResultDto.class);
+    }
+
+    @Override
+    public RenameFeatureDto renameFeature(String newName, Long featureId) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("featureId", String.valueOf(featureId));
+        requestParameters.put("newName", newName);
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "renameFeature", requestParameters, "");
+        return objectMapper.readValue(requestResponse.getOutput(),
+                RenameFeatureDto.class);
+    }
+
+    @Override
+    public AddListValueFeatureDto addListValues(List<String> values, Long featureId) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("featureId", String.valueOf(featureId));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addFeatureValue", requestParameters, objectMapper.writeValueAsString(values));
+        return objectMapper.readValue(requestResponse.getOutput(),
+                AddListValueFeatureDto.class);
     }
 
     private Map<String, String> minArgs() {

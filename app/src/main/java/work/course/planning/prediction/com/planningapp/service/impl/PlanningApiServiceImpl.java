@@ -15,12 +15,16 @@ import work.course.planning.prediction.com.planningapp.dto.response.AddListValue
 import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
+import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.RemoveExampleResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RenameFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RequestResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.SendRequestService;
+
+import static android.R.attr.id;
 
 /**
  * Created by Oleh Yanivskyy on 03.04.2017.
@@ -110,6 +114,28 @@ public class PlanningApiServiceImpl implements PlanningApiService {
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addExample", requestParameters, objectMapper.writeValueAsString(addExampleDto));
         return objectMapper.readValue(requestResponse.getOutput(),
                 AddExampleResultDto.class);
+    }
+
+    @Override
+    public ExamplesListDto getExamples(Long modelId) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("modelId", String.valueOf(modelId));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "examples", requestParameters, "");
+
+        return objectMapper.readValue(requestResponse.getOutput(),
+                ExamplesListDto.class);
+    }
+
+    @Override
+    public RemoveExampleResultDto deleteExample(Long exampleId) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("id", String.valueOf(exampleId));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "removeExample", requestParameters, "");
+
+        return objectMapper.readValue(requestResponse.getOutput(),
+                RemoveExampleResultDto.class);
     }
 
     private Map<String, String> minArgs() {

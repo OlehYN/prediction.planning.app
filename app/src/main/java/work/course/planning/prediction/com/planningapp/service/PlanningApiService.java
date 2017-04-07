@@ -10,8 +10,10 @@ import work.course.planning.prediction.com.planningapp.dto.response.AddListValue
 import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
+import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.RemoveExampleResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RenameFeatureDto;
 
 /**
@@ -34,4 +36,8 @@ public interface PlanningApiService {
     AddListValueFeatureDto addListValues(List<String> values, Long featureId) throws  IOException;
 
     AddExampleResultDto addExample(AddExampleDto addExampleDto) throws  IOException;
+
+    ExamplesListDto getExamples(Long modelId) throws  IOException;
+
+    RemoveExampleResultDto deleteExample(Long exampleId) throws  IOException;
 }

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -97,6 +98,7 @@ public class CreateExampleActivity extends AppCompatActivity {
                     spinners.put(featureDto.getId(), spinner);
                 }else{
                     EditText editText = new EditText(CreateExampleActivity.this);
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER);
                     inputs.put(featureDto.getId(), editText);
                     linearLayout.addView(editText);
                 }

@@ -46,11 +46,6 @@ public class FeatureDto {
 
     @Override
     public String toString() {
-        return "FeatureDto{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", isCategory=" + isCategory +
-                ", values=" + values +
-                '}';
+        return name;
     }
 }

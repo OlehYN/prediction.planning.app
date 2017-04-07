@@ -8,7 +8,9 @@ import java.util.List;
 import java.util.Map;
 
 import work.course.planning.prediction.com.planningapp.config.PlanningApplication;
+import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.response.AddExampleResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.AddListValueFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
@@ -99,6 +101,15 @@ public class PlanningApiServiceImpl implements PlanningApiService {
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addFeatureValue", requestParameters, objectMapper.writeValueAsString(values));
         return objectMapper.readValue(requestResponse.getOutput(),
                 AddListValueFeatureDto.class);
+    }
+
+    @Override
+    public AddExampleResultDto addExample(AddExampleDto addExampleDto) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addExample", requestParameters, objectMapper.writeValueAsString(addExampleDto));
+        return objectMapper.readValue(requestResponse.getOutput(),
+                AddExampleResultDto.class);
     }
 
     private Map<String, String> minArgs() {

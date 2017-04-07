@@ -21,7 +21,8 @@
         </activity>
         <activity android:name=".activity.ModelManageActivity" />
         <activity android:name=".activity.FeaturesActivity" />
-        <activity android:name=".activity.CreateFeatureActivity"></activity>
+        <activity android:name=".activity.CreateFeatureActivity" />
+        <activity android:name=".activity.CreateExampleActivity"></activity>
     </application>
 
 </manifest>

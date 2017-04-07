@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="work.course.planning.prediction.com.planningapp.activity.CreateExampleActivity"
+    android:weightSum="1">
+
+    <Button
+        android:id="@+id/backToModelFromExample"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to model" />
+
+    <TextView
+        android:id="@+id/spentTimeTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:text="Time: " />
+
+    <EditText
+        android:id="@+id/outputLabelEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time" />
+
+    <LinearLayout
+        android:id="@+id/createExampleActivity"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+    <Spinner
+        android:id="@+id/featuresSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5" />
+
+    <Button
+        android:id="@+id/addFeatureInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add feature" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/createExampleButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create example" />
+    </LinearLayout>
+</LinearLayout>

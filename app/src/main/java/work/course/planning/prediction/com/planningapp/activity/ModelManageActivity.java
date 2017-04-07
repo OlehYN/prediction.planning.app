@@ -50,6 +50,18 @@ public class ModelManageActivity extends AppCompatActivity {
             }
         });
 
+        Button createExampleButton = (Button) findViewById(R.id.createExample);
+        createExampleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(ModelManageActivity.this, CreateExampleActivity.class);
+                intent.putExtra("modelInfoId", modelInfoId);
+                intent.putExtra("modelInfoName", modelInfoName);
+                startActivity(intent);
+            }
+        });
+
         Button predictButton = (Button) findViewById(R.id.predictButton);
         predictButton.setOnClickListener(new View.OnClickListener() {
             @Override

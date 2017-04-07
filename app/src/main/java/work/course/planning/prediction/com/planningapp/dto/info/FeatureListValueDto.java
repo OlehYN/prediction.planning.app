@@ -26,9 +26,6 @@ public class FeatureListValueDto {
 
     @Override
     public String toString() {
-        return "FeatureListValueDto{" +
-                "id=" + id +
-                ", value='" + value + '\'' +
-                '}';
+        return value;
     }
 }

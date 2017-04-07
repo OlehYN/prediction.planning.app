@@ -3,7 +3,9 @@ package work.course.planning.prediction.com.planningapp.service;
 import java.io.IOException;
 import java.util.List;
 
+import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.response.AddExampleResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.AddListValueFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
@@ -30,4 +32,6 @@ public interface PlanningApiService {
     RenameFeatureDto renameFeature(String newName, Long featureId) throws  IOException;
 
     AddListValueFeatureDto addListValues(List<String> values, Long featureId) throws  IOException;
+
+    AddExampleResultDto addExample(AddExampleDto addExampleDto) throws  IOException;
 }

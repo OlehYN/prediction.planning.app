@@ -70,7 +70,10 @@ public class ModelManageActivity extends AppCompatActivity {
         predictButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO async task
+                Intent intent = new Intent(ModelManageActivity.this, PredictionActivity.class);
+                intent.putExtra("modelInfoId", modelId);
+                intent.putExtra("modelInfoName", modelName);
+                startActivity(intent);
             }
         });
 

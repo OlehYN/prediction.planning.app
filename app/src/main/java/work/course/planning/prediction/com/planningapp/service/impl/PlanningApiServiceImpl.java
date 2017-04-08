@@ -11,6 +11,7 @@ import work.course.planning.prediction.com.planningapp.config.PlanningApplicatio
 import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.request.PredictDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
@@ -140,6 +141,17 @@ public class PlanningApiServiceImpl implements PlanningApiService {
 
         return objectMapper.readValue(requestResponse.getOutput(),
                 objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
+    }
+
+    @Override
+    public GenericResponse<Integer> predict(PredictDto predictDto) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("modelId", String.valueOf(predictDto.getModelId()));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "predict", requestParameters, objectMapper.writeValueAsString(predictDto.getExamples()));
+
+        return objectMapper.readValue(requestResponse.getOutput(),
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Integer.class));
     }
 
     private Map<String, String> minArgs() {

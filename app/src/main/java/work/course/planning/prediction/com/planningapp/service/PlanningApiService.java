@@ -6,6 +6,7 @@ import java.util.List;
 import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.request.PredictDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
@@ -37,4 +38,6 @@ public interface PlanningApiService {
     GenericResponse<Boolean> deleteExample(Long exampleId) throws  IOException;
 
     GenericResponse<Boolean> updateModel(Long modelId) throws  IOException;
+
+    GenericResponse<Integer> predict(PredictDto predictDto) throws IOException;
 }

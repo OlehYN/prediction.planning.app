@@ -22,7 +22,8 @@
         <activity android:name=".activity.ModelManageActivity" />
         <activity android:name=".activity.FeaturesActivity" />
         <activity android:name=".activity.CreateFeatureActivity" />
-        <activity android:name=".activity.CreateExampleActivity"></activity>
+        <activity android:name=".activity.CreateExampleActivity" />
+        <activity android:name=".activity.PredictionActivity"></activity>
     </application>
 
 </manifest>

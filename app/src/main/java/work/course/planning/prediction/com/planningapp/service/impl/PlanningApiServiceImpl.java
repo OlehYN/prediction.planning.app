@@ -8,23 +8,16 @@ import java.util.List;
 import java.util.Map;
 
 import work.course.planning.prediction.com.planningapp.config.PlanningApplication;
+import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
 import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
-import work.course.planning.prediction.com.planningapp.dto.response.AddExampleResultDto;
-import work.course.planning.prediction.com.planningapp.dto.response.AddListValueFeatureDto;
-import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
-import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
-import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
-import work.course.planning.prediction.com.planningapp.dto.response.RemoveExampleResultDto;
-import work.course.planning.prediction.com.planningapp.dto.response.RenameFeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.response.RequestResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.SendRequestService;
-
-import static android.R.attr.id;
 
 /**
  * Created by Oleh Yanivskyy on 03.04.2017.
@@ -48,22 +41,22 @@ public class PlanningApiServiceImpl implements PlanningApiService {
     }
 
     @Override
-    public CreateModelDto createModel(String name) throws IOException {
+    public GenericResponse<ModelInfoDto> createModel(String name) throws IOException {
         Map<String, String> requestParameters = minArgs();
         requestParameters.put("name", name);
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "createModel", requestParameters, "");
         return objectMapper.readValue(requestResponse.getOutput(),
-                CreateModelDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, ModelInfoDto.class));
     }
 
     @Override
-    public DeleteModelDto deleteModel(Long id) throws IOException {
+    public GenericResponse<Boolean> deleteModel(Long id) throws IOException {
         Map<String, String> requestParameters = minArgs();
         requestParameters.put("modelId", String.valueOf(id));
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "deleteModel", requestParameters, "");
-        return objectMapper.readValue(requestResponse.getOutput(), DeleteModelDto.class);
+        return objectMapper.readValue(requestResponse.getOutput(), objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
     }
 
     @Override
@@ -78,42 +71,42 @@ public class PlanningApiServiceImpl implements PlanningApiService {
     }
 
     @Override
-    public CreateFeatureResultDto createFeature(CreateFeatureDto createFeatureDto) throws IOException {
+    public GenericResponse<Long> createFeature(CreateFeatureDto createFeatureDto) throws IOException {
         Map<String, String> requestParameters = minArgs();
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "createFeature", requestParameters, objectMapper.writeValueAsString(createFeatureDto));
         return objectMapper.readValue(requestResponse.getOutput(),
-                CreateFeatureResultDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Long.class));
     }
 
     @Override
-    public RenameFeatureDto renameFeature(String newName, Long featureId) throws IOException {
+    public GenericResponse<Boolean> renameFeature(String newName, Long featureId) throws IOException {
         Map<String, String> requestParameters = minArgs();
         requestParameters.put("featureId", String.valueOf(featureId));
         requestParameters.put("newName", newName);
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "renameFeature", requestParameters, "");
         return objectMapper.readValue(requestResponse.getOutput(),
-                RenameFeatureDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
     }
 
     @Override
-    public AddListValueFeatureDto addListValues(List<String> values, Long featureId) throws IOException {
+    public GenericResponse<Boolean> addListValues(List<String> values, Long featureId) throws IOException {
         Map<String, String> requestParameters = minArgs();
         requestParameters.put("featureId", String.valueOf(featureId));
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addFeatureValue", requestParameters, objectMapper.writeValueAsString(values));
         return objectMapper.readValue(requestResponse.getOutput(),
-                AddListValueFeatureDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
     }
 
     @Override
-    public AddExampleResultDto addExample(AddExampleDto addExampleDto) throws IOException {
+    public GenericResponse<Boolean> addExample(AddExampleDto addExampleDto) throws IOException {
         Map<String, String> requestParameters = minArgs();
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "addExample", requestParameters, objectMapper.writeValueAsString(addExampleDto));
         return objectMapper.readValue(requestResponse.getOutput(),
-                AddExampleResultDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
     }
 
     @Override
@@ -128,14 +121,25 @@ public class PlanningApiServiceImpl implements PlanningApiService {
     }
 
     @Override
-    public RemoveExampleResultDto deleteExample(Long exampleId) throws IOException {
+    public GenericResponse<Boolean> deleteExample(Long exampleId) throws IOException {
         Map<String, String> requestParameters = minArgs();
         requestParameters.put("id", String.valueOf(exampleId));
 
         RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "removeExample", requestParameters, "");
 
         return objectMapper.readValue(requestResponse.getOutput(),
-                RemoveExampleResultDto.class);
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
+    }
+
+    @Override
+    public GenericResponse<Boolean> updateModel(Long modelId) throws IOException {
+        Map<String, String> requestParameters = minArgs();
+        requestParameters.put("modelId", String.valueOf(modelId));
+
+        RequestResponse requestResponse = sendRequestService.sendRequest(host, port, "updateModel", requestParameters, "");
+
+        return objectMapper.readValue(requestResponse.getOutput(),
+                objectMapper.getTypeFactory().constructParametricType(GenericResponse.class, Boolean.class));
     }
 
     private Map<String, String> minArgs() {

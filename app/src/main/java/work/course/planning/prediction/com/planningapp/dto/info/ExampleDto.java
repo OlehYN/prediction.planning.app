@@ -1,4 +1,4 @@
-package work.course.planning.prediction.com.planningapp.dto.response;
+package work.course.planning.prediction.com.planningapp.dto.info;
 
 import java.util.Date;
 import java.util.List;

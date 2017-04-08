@@ -5,21 +5,14 @@ import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ExpandableListView;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import work.course.planning.prediction.com.planningapp.R;
-import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
-import work.course.planning.prediction.com.planningapp.dto.response.DeleteModelDto;
 import work.course.planning.prediction.com.planningapp.dto.response.ExamplesListDto;
-import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.graphics.ExamplesListAdapter;
-import work.course.planning.prediction.com.planningapp.graphics.FeaturesListAdapter;
-import work.course.planning.prediction.com.planningapp.graphics.ModelsListAdapter;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -85,7 +78,7 @@ public class ModelManageActivity extends AppCompatActivity {
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO async task
+                new UpdateModelAsyncTask().execute(modelId);
             }
         });
 
@@ -101,13 +94,54 @@ public class ModelManageActivity extends AppCompatActivity {
         new ListExamplesAsyncTask().execute(modelId);
     }
 
-    private class DeleteModelAsyncTask extends AsyncTask<Long, Void, DeleteModelDto> {
+    private class UpdateModelAsyncTask extends AsyncTask<Long, Void, GenericResponse<Boolean>> {
         @Override
-        protected DeleteModelDto doInBackground(Long... params) {
+        protected GenericResponse<Boolean> doInBackground(Long... params) {
 
             Long id = params[0];
             if (id == null || id == -1L) {
-                return new DeleteModelDto();
+                return new GenericResponse<>();
+            } else {
+                try {
+                    return planningApiService.updateModel(id);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+
+        @Override
+        protected void onPostExecute(GenericResponse<Boolean> result) {
+            if(result == null) {
+                Toast.makeText(ModelManageActivity.this, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if(result.getCode() == 0) {
+                Toast.makeText(getApplicationContext(), "Something gone wrong, please, try again later", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if(result.getCode() != 200){
+                Toast.makeText(ModelManageActivity.this, result.getErrorCode(), Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            Toast.makeText(ModelManageActivity.this, "Model was updated successfully", Toast.LENGTH_LONG).show();
+
+            Intent intent = new Intent(ModelManageActivity.this, ModelManageActivity.class);
+            intent.putExtra("modelInfoName", modelName);
+            intent.putExtra("modelInfoId", modelId);
+            startActivity(intent);
+        }
+    }
+
+    private class DeleteModelAsyncTask extends AsyncTask<Long, Void, GenericResponse<Boolean>> {
+        @Override
+        protected GenericResponse<Boolean> doInBackground(Long... params) {
+
+            Long id = params[0];
+            if (id == null || id == -1L) {
+                return new GenericResponse<>();
             } else {
                 try {
                     return planningApiService.deleteModel(id);
@@ -118,7 +152,7 @@ public class ModelManageActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(DeleteModelDto result) {
+        protected void onPostExecute(GenericResponse<Boolean> result) {
             if(result == null) {
                 Toast.makeText(ModelManageActivity.this, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();
                 return;
@@ -165,7 +199,6 @@ public class ModelManageActivity extends AppCompatActivity {
             }
 
             expandableListView = (ExpandableListView) findViewById(R.id.examplesExpList);
-            System.out.println(examplesListDto);
             ExamplesListAdapter examplesListAdapter = new ExamplesListAdapter(ModelManageActivity.this, examplesListDto.getExampleDtos(), ModelManageActivity.this, modelId, modelName);
             expandableListView.setAdapter(examplesListAdapter);
         }

@@ -14,8 +14,8 @@ import android.widget.Toast;
 import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.R;
-import work.course.planning.prediction.com.planningapp.dto.response.CreateModelDto;
 import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.dto.response.ModelsListDto;
 import work.course.planning.prediction.com.planningapp.graphics.ModelsListAdapter;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private class CreateModelAsyncTask extends AsyncTask<String, Void, CreateModelDto> {
+    private class CreateModelAsyncTask extends AsyncTask<String, Void, GenericResponse<ModelInfoDto>> {
         @Override
-        protected CreateModelDto doInBackground(String... params) {
+        protected GenericResponse<ModelInfoDto> doInBackground(String... params) {
 
             String name = params[0];
             if (name == null || name.length() == 0 || name.length() > 100) {
-                return new CreateModelDto();
+                return new GenericResponse<>();
             } else {
                 try {
                     return planningApiService.createModel(name);
@@ -64,13 +64,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(CreateModelDto createModelDto) {
+        protected void onPostExecute(GenericResponse<ModelInfoDto> createModelDto) {
             if(createModelDto == null) {
                 Toast.makeText(MainActivity.this, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();
                 return;
             }
 
-            if(createModelDto.getModelInfoDto() == null) {
+            if(createModelDto.getData() == null) {
                 Toast.makeText(getApplicationContext(), "Name should not be empty and length should be less than 100 characters", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             List<ModelInfoDto> models = ((ModelsListAdapter) listView.getAdapter()).getData();
-            models.add(createModelDto.getModelInfoDto());
+            models.add(createModelDto.getData());
             ((ModelsListAdapter) listView.getAdapter()).notifyDataSetChanged();
         }
     }

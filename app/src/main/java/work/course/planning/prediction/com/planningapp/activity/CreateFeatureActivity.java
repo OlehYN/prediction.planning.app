@@ -15,7 +15,7 @@ import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
-import work.course.planning.prediction.com.planningapp.dto.response.CreateFeatureResultDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -75,9 +75,9 @@ public class CreateFeatureActivity extends AppCompatActivity {
         });
     }
 
-    private class CreateFeatureAsyncTask extends AsyncTask<CreateFeatureDto, Void, CreateFeatureResultDto> {
+    private class CreateFeatureAsyncTask extends AsyncTask<CreateFeatureDto, Void, GenericResponse<Long>> {
         @Override
-        protected CreateFeatureResultDto doInBackground(CreateFeatureDto... params) {
+        protected GenericResponse<Long> doInBackground(CreateFeatureDto... params) {
             try {
                 planningApiService = new PlanningApiServiceImpl();
                 return planningApiService.createFeature(params[0]);
@@ -89,7 +89,7 @@ public class CreateFeatureActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(CreateFeatureResultDto createFeatureResultDto) {
+        protected void onPostExecute(GenericResponse<Long> createFeatureResultDto) {
 
             if(createFeatureResultDto == null){
                 Toast.makeText(CreateFeatureActivity.this, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();

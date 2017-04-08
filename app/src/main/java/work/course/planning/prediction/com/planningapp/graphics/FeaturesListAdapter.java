@@ -5,33 +5,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.activity.FeaturesActivity;
-import work.course.planning.prediction.com.planningapp.activity.ModelManageActivity;
 import work.course.planning.prediction.com.planningapp.dto.info.FeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.info.FeatureListValueDto;
-import work.course.planning.prediction.com.planningapp.dto.info.ModelInfoDto;
-import work.course.planning.prediction.com.planningapp.dto.request.CreateFeatureDto;
-import work.course.planning.prediction.com.planningapp.dto.response.AddListValueFeatureDto;
-import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
-import work.course.planning.prediction.com.planningapp.dto.response.RenameFeatureDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -226,9 +217,9 @@ public class FeaturesListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    private class AddListValueFeatureAsyncTask extends AsyncTask<Object, Void, AddListValueFeatureDto> {
+    private class AddListValueFeatureAsyncTask extends AsyncTask<Object, Void, GenericResponse<Boolean>> {
         @Override
-        protected AddListValueFeatureDto doInBackground(Object... params) {
+        protected GenericResponse<Boolean> doInBackground(Object... params) {
             try {
                 planningApiService = new PlanningApiServiceImpl();
                 return planningApiService.addListValues((List<String>) params[1], (Long) params[0]);
@@ -240,7 +231,7 @@ public class FeaturesListAdapter extends BaseExpandableListAdapter {
         }
 
         @Override
-        protected void onPostExecute(AddListValueFeatureDto addListValueFeatureDto) {
+        protected void onPostExecute(GenericResponse<Boolean> addListValueFeatureDto) {
 
             if(addListValueFeatureDto == null){
                 Toast.makeText(activity, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();
@@ -259,9 +250,9 @@ public class FeaturesListAdapter extends BaseExpandableListAdapter {
         }
     }
 
-    private class CreateFeatureAsyncTask extends AsyncTask<Object, Void, RenameFeatureDto> {
+    private class CreateFeatureAsyncTask extends AsyncTask<Object, Void, GenericResponse<Boolean>> {
         @Override
-        protected RenameFeatureDto doInBackground(Object... params) {
+        protected GenericResponse<Boolean> doInBackground(Object... params) {
             try {
                 planningApiService = new PlanningApiServiceImpl();
                 return planningApiService.renameFeature((String) params[0], (Long) params[1]);
@@ -273,7 +264,7 @@ public class FeaturesListAdapter extends BaseExpandableListAdapter {
         }
 
         @Override
-        protected void onPostExecute(RenameFeatureDto featuresListDto) {
+        protected void onPostExecute(GenericResponse<Boolean> featuresListDto) {
 
             if(featuresListDto == null){
                 Toast.makeText(activity, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();

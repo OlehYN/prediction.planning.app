@@ -1,4 +1,4 @@
-package work.course.planning.prediction.com.planningapp.dto.response;
+package work.course.planning.prediction.com.planningapp.dto.info;
 
 
 public class ExampleInstanceDto {

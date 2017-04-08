@@ -17,9 +17,9 @@ import java.util.List;
 
 import work.course.planning.prediction.com.planningapp.R;
 import work.course.planning.prediction.com.planningapp.activity.ModelManageActivity;
-import work.course.planning.prediction.com.planningapp.dto.response.ExampleDto;
-import work.course.planning.prediction.com.planningapp.dto.response.ExampleInstanceDto;
-import work.course.planning.prediction.com.planningapp.dto.response.RemoveExampleResultDto;
+import work.course.planning.prediction.com.planningapp.dto.info.ExampleDto;
+import work.course.planning.prediction.com.planningapp.dto.info.ExampleInstanceDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -121,9 +121,9 @@ public class ExamplesListAdapter extends BaseExpandableListAdapter {
         return view;
     }
 
-    private class RemoveExampleAsyncTatk extends AsyncTask<Long, Void, RemoveExampleResultDto> {
+    private class RemoveExampleAsyncTatk extends AsyncTask<Long, Void, GenericResponse<Boolean>> {
         @Override
-        protected RemoveExampleResultDto doInBackground(Long... params) {
+        protected GenericResponse<Boolean> doInBackground(Long... params) {
             try {
                 planningApiService = new PlanningApiServiceImpl();
                 return planningApiService.deleteExample(params[0]);
@@ -135,7 +135,7 @@ public class ExamplesListAdapter extends BaseExpandableListAdapter {
         }
 
         @Override
-        protected void onPostExecute(RemoveExampleResultDto removeExampleResultDto) {
+        protected void onPostExecute(GenericResponse<Boolean> removeExampleResultDto) {
 
             if(removeExampleResultDto == null){
                 Toast.makeText(activity, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();

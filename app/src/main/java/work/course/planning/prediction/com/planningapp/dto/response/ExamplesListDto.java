@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+import work.course.planning.prediction.com.planningapp.dto.info.ExampleDto;
+
 /**
  * Created by Oleh Yanivskyy on 08.04.2017.
  */

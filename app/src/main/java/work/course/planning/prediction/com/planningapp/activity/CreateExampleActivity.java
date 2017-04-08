@@ -14,7 +14,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Time;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -28,8 +27,8 @@ import work.course.planning.prediction.com.planningapp.dto.info.FeatureDto;
 import work.course.planning.prediction.com.planningapp.dto.info.FeatureListValueDto;
 import work.course.planning.prediction.com.planningapp.dto.request.AddExampleDto;
 import work.course.planning.prediction.com.planningapp.dto.request.AddExampleInstanceDto;
-import work.course.planning.prediction.com.planningapp.dto.response.AddExampleResultDto;
 import work.course.planning.prediction.com.planningapp.dto.response.FeaturesListDto;
+import work.course.planning.prediction.com.planningapp.dto.response.GenericResponse;
 import work.course.planning.prediction.com.planningapp.service.PlanningApiService;
 import work.course.planning.prediction.com.planningapp.service.impl.PlanningApiServiceImpl;
 
@@ -160,9 +159,9 @@ public class CreateExampleActivity extends AppCompatActivity {
         });
     }
 
-    private class CreateExampleAsyncTask extends AsyncTask<AddExampleDto, Void, AddExampleResultDto> {
+    private class CreateExampleAsyncTask extends AsyncTask<AddExampleDto, Void, GenericResponse<Boolean>> {
         @Override
-        protected AddExampleResultDto doInBackground(AddExampleDto... params) {
+        protected GenericResponse<Boolean> doInBackground(AddExampleDto... params) {
             try {
                 planningApiService = new PlanningApiServiceImpl();
                 return planningApiService.addExample(params[0]);
@@ -174,7 +173,7 @@ public class CreateExampleActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(AddExampleResultDto addExampleResultDto) {
+        protected void onPostExecute(GenericResponse<Boolean> addExampleResultDto) {
 
             if(addExampleResultDto == null){
                 Toast.makeText(CreateExampleActivity.this, "Cannot connect to the server, please, try again later", Toast.LENGTH_LONG).show();
